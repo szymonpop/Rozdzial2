@@ -1,6 +1,6 @@
+import Homeworks.KolkoKrzyzyk;
+
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class Main {
 
@@ -60,12 +60,31 @@ public class Main {
 
         }
 */
+
         int[][] gra=new int[3][3];
-        gra=KolkoKrzyzyk.LoadGameFromTxt();
-        KolkoKrzyzyk.CheckWin(gra,KolkoKrzyzyk.NadalTrwa(gra));
+        gra= KolkoKrzyzyk.LoadGameFromTxt();
+        KolkoKrzyzyk.CheckWin(gra, KolkoKrzyzyk.NadalTrwa(gra));
 
 
-
-
+        //Homeworks.Fibonacci.PrintFibonacciNElements();
+       // Homeworks.Fibonacci.PrintFibonacciToN();
+/*
+        String email = "szymon.popek@gmail.org";
+        if (Homeworks.IsEmail.isValid(email)){
+            System.out.print("valid");
+        }
+        else{
+            System.out.print("not valid");
+        }
+*/
+/*
+        Invoice Faktura= new Invoice();
+        Faktura.addItem("Czarna Farba,",3,2.50);
+        Faktura.addItem("Zielona Farba,",5,2);
+        Faktura.addItem("Biała Farba,",10,1.5);
+        Faktura.printInvoice();
+*/
     }
+
+
 }

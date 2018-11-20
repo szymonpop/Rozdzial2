@@ -1,3 +1,5 @@
+package Homeworks;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -26,13 +28,14 @@ public class KolkoKrzyzyk {
     /**
      * Wczytuje plik zawierający:
      * liczby 1, 0 lub -1 oznaczające kolejno: krzyżyk, puste pole, kółko.
+     * Liczby oddzielane są tylko przecinkami
      * @return zwraca tablice 2d przedstawiającą planszę 3x3 gry
      * @return tabelka - gdy jest prawidlowa liczba danych, tabelkaPiatek - gdy liczba danych nieprawidłowa lub
      * gdy dane zawierają liczbę,która nie jest 1,0 lub -1.
      * @throws FileNotFoundException
      */
     public static int[][] LoadGameFromTxt() throws FileNotFoundException {
-        File inFile = new File("C:\\Users\\Szymon\\IdeaProjects\\Rozdzial2\\src\\DoKolkaIKrzyzyka.txt");
+        File inFile = new File("C:\\Users\\Szymon\\IdeaProjects\\Rozdzial2\\src\\Homeworks\\DoKolkaIKrzyzyka.txt");
         int[][] tabelka = new int[3][3];
         int[][] tabelkaPiatek = new int[3][3];
         for(int i =0; i<3; i++) {
@@ -41,6 +44,18 @@ public class KolkoKrzyzyk {
             }
         }
         Scanner scanner = new Scanner(inFile);
+        int i=0;
+        while (scanner.hasNext()){
+            String line = scanner.nextLine();
+            String[] elems = line.split(",");
+
+         for (int j=0; j<3; j++){
+             tabelka[i][j]=Integer.parseInt(elems[j]);
+         }
+         i++;
+        }
+
+/*
         for(int i =0; i<3; i++){
             for(int j=0; j<3; j++){
                 if(scanner.hasNextInt())
@@ -50,6 +65,7 @@ public class KolkoKrzyzyk {
                 }
             }
         }
+        */
         return tabelka;
     }
 
@@ -85,16 +101,21 @@ public class KolkoKrzyzyk {
 
     public static int CheckWin(int[][] gra, boolean nadalTrwa)  {
         int wynik = 0;
-        int sumka = 0;
+        int max = 0;
+        int min= 0;
         for (int j = 0; j < 3; j++) {
             for (int i = 0; i < 3; i++) {
-                sumka += gra[i][j];
+                max = Math.max(gra[i][j],max);
+                min = Math.min(gra[i][j],min);
             }
         }
-            if(sumka>10){
-                System.out.print("Brakuje danych lub dane nieprawidłowe. Oznacz wszystkie 9 pól znakami {1, 0, -1");
-                return 10;
-            }
+        if(max>1){
+            wynik = 5;
+        }
+        if(min<-1){
+            wynik = 5;
+        }
+
 
             for (int j = 0; j < 3; j++) {
                 int checkrow = 0;
@@ -136,7 +157,7 @@ public class KolkoKrzyzyk {
                 System.out.print("Remis");
             }
             else{
-                System.out.print("coś nie tak");
+                System.out.print("coś nie tak- wystąpiły dane, które nie są z {-1, 0, 1");
             }
             return wynik;
         }
